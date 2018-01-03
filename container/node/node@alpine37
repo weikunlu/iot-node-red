@@ -1,0 +1,25 @@
+FROM alpine:3.6
+MAINTAINER Weikun Lu <weikun.lu@gmail.com>
+
+ENV INSTALL_PATH=/develop
+RUN mkdir -p $INSTALL_PATH
+WORKDIR $INSTALL_PATH
+
+##################################################
+
+RUN apk update && \
+    apk add --no-cache vim curl tar xz bash htop supervisor nodejs nodejs-npm && \
+    rm -rf /var/cache/apk/*
+
+
+##################################################
+
+COPY supervisord.conf /etc/supervisord.conf
+
+##################################################
+
+EXPOSE 1880
+
+##################################################
+
+CMD ["supervisord", "-c", "/etc/supervisord.conf", "-n"]

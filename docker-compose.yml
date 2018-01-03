@@ -1,0 +1,16 @@
+# See also:   https://docs.docker.com/compose/yml/
+version: '2'
+
+services:
+  iot-node-red:
+    build:
+      context: ./container/node
+      dockerfile: node@alpine37
+    container_name: iot-node-red
+    hostname: iot-node-red
+    ports:
+      - 1880:1880
+    expose:
+      - 1880
+    volumes:
+      - ./nodered/.dist/node-red-${TAG}:/develop/node-red

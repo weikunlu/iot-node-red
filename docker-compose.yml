@@ -8,6 +8,8 @@ services:
       dockerfile: node@alpine37
     container_name: iot-node-red
     hostname: iot-node-red
+    environment:
+      - NODE_ENV=development
     ports:
       - 1880:1880
     expose:

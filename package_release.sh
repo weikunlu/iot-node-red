@@ -2,11 +2,19 @@
 source .env
 
 cd nodered
-
+result=$(grep "version" ./package.json)
+echo 'show version:' $result
+if [[ "    \"version\"      : \"$TAG\"," == $result ]]; then
+  # Do nothing
+  echo "ok"
+else
+  git checkout tags/$TAG
+fi
 grunt release
 
 cd .dist
+tar -cvzf node-red-$TAG.tar node-red-$TAG
+mv node-red-$TAG.tar ../../
 
-tar -cvzf node-red.tar node-red-$TAG
-
-mv node-red.tar ../../
+cd ..
+grunt clean

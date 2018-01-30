@@ -9,9 +9,7 @@ git submodule init
 
 git submodule update
 
-cd nodered
-
-grunt release
+./package_release.sh
 
 docker-compose up -d
 

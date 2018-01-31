@@ -10,11 +10,9 @@ if [[ "    \"version\"      : \"$TAG\"," == $result ]]; then
 else
   git checkout tags/$TAG
 fi
+grunt clean
 grunt release
 
 cd .dist
 tar -cvzf node-red-$TAG.tar node-red-$TAG
 mv node-red-$TAG.tar ../../
-
-cd ..
-grunt clean

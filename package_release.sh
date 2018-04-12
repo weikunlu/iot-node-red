@@ -4,7 +4,7 @@ source .env
 cd nodered
 result=$(grep "version" ./package.json)
 echo 'show version:' $result
-if [[ "    \"version\"      : \"$TAG\"," == $result ]]; then
+if [[ $result = *"$TAG"* ]]; then
   # Do nothing
   echo "ok"
 else
